@@ -1,0 +1,59 @@
+Project Context Snapshot
+Date: 2026-04-25
+Workspace: /Users/0uts1d3r4/Documents/Cursor
+
+Overview
+- Built a Spotify-like local MP3 web app (React + TypeScript + Vite).
+- Users can import MP3 files from local machine, play tracks, browse songs/artists/albums, create playlists, and fetch internet metadata.
+
+Implemented Features
+- MP3 import:
+  - File picker import.
+  - Drag-and-drop import (including folder traversal where browser supports webkit entries).
+- Metadata:
+  - ID3 parsing via jsmediatags.
+  - Duration extraction from audio metadata.
+  - Online enrichment via iTunes Search API with localStorage cache/TTL.
+- Playback:
+  - Play/pause/seek/volume.
+  - Next/previous + repeat modes.
+  - Shuffle behavior fixed to use stable shuffled order (not random repeat on each next).
+  - Previous-at-queue-start behavior fixed to set isPlaying=true consistently.
+- Visuals:
+  - Waveform visualizer added under the seek/progress marker in PlayerBar.
+  - Progress marker line overlays waveform.
+- Library and playlists:
+  - IndexedDB (Dexie) for tracks and playlists.
+  - Playlist create/rename/delete.
+  - Add/remove/reorder playlist tracks.
+
+Key Build/Config Fixes
+- Fixed @vitejs/plugin-react resolution issue by ensuring dependencies are installed.
+- Fixed jsmediatags resolution issue:
+  - Added Vite alias to jsmediatags build2 entry because package browser field points to missing dist file.
+- Fixed "Could not resolve react-native-fs":
+  - Added shim at src/shims/react-native-fs.ts.
+  - Added Vite alias for react-native-fs to shim.
+- Vite config uses defineConfig from vitest/config for typed test config.
+- Added @types/node dev dependency for Node typings in config files.
+
+Testing
+- Added/expanded basic automated tests for:
+  - time formatting
+  - library summaries/filtering
+  - playlist uniqueness helper
+  - player shuffle and queue behavior
+  - metadata enrichment caching/fetch mocking
+  - drag-drop and MP3 utility checks
+  - App smoke render test
+
+Current Status
+- Production build succeeds: npm run build.
+- Non-blocking warnings remain from jsmediatags optional Node/RN paths (fs/buffer externalized), but build is green.
+
+Common Commands
+- Install deps: npm install
+- Dev server: npm run dev
+- Build: npm run build
+- Tests: npm test
+

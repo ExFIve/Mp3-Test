@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local MP3 Web App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      (function () {
+        if (location.protocol !== "file:") return;
+        var root = document.getElementById("root");
+        if (!root) return;
+        root.innerHTML =
+          '<main style="font-family:system-ui,sans-serif;padding:2rem;max-width:36rem;line-height:1.55;color:#111;background:#fafafa;min-height:100vh;box-sizing:border-box">' +
+          "<h1 style=\"margin-top:0;font-size:1.25rem\">This page needs the dev server</h1>" +
+          "<p>Vite + React cannot run when you open <code>index.html</code> as a file. The browser would try to load <code>/src/main.tsx</code> from your disk root, which fails.</p>" +
+          "<p><strong>Do this instead:</strong> open a terminal in this project folder, then run:</p>" +
+          "<pre style=\"background:#eee;padding:1rem;border-radius:8px;overflow:auto\">npm install\nnpm run dev</pre>" +
+          "<p>Your browser should open at <strong>http://localhost:5173</strong> (or check the terminal for the exact URL).</p>" +
+          "<p>For a static build you can host anywhere, run <code>npm run build</code> then <code>npm run preview</code>.</p>" +
+          "</main>";
+      })();
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
